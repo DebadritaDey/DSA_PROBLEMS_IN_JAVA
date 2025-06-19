@@ -1,32 +1,46 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int[] ans ={-1,-1};
-        int start = search(nums,target,true);
-        int end = search(nums,target,false);
-        ans[0] = start;
-        ans[1] = end;
-        return ans;
+        int[] arr = new int[2];
+        arr[0] = firstoccurance(nums,target);
+        arr[1] = lastoccurance(nums,target);
+        return arr;
     }
-    //this function just returns the index value of target
-    int search(int[] nums, int target, boolean findStartIndex){
-       int start=0;
-       int end = nums.length-1;
-       int ans = -1;
-        while(start<=end){
-            int mid = start + (end-start)/2;
-            if(target < nums[mid]){
-                end = mid-1;
-            } else if(target > nums[mid]){
-                start = mid +1;
-            } else{
-                ans = mid;
-                if(findStartIndex == true){
-                    end = mid -1;
-                } else{
-                    start = mid + 1;
-                }
+    public static int firstoccurance(int[] arr, int target) {
+        int start = 0;
+        int end = arr.length - 1;
+        int res = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (target == arr[mid]) {
+                res = mid;
+                end = mid - 1;
+            } else if (target < arr[mid]) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
             }
         }
-        return ans; 
+        return res;
     }
+
+    public static int lastoccurance(int[] arr, int target) {
+        int start = 0;
+        int end = arr.length - 1;
+        int res = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (target == arr[mid]) {
+                res = mid;
+                start = mid + 1;
+            } else if (target < arr[mid]) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return res;
+    }
+
 }
