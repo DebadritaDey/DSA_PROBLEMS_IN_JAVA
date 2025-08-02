@@ -24,6 +24,6 @@ class Solution {
             }
         }
         tail.next = (list1 != null) ?  list1:list2;
-        return dummyHead.next;
+        return dummyHead.next; 
     }
 }
